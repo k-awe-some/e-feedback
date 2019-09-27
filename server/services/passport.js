@@ -12,8 +12,14 @@ passport.use(
       clientSecret: keys.googleClientSecret,
       callbackURL: "/auth/google/callback"
     },
-    (accessToken, refreshToken, profile) => {
-      new User({ googleId: profile.id }).save(); // creates and saves User Model Instance
+    (accessToken, refreshToken, profile, done) => {
+      User.findOne({ googleId: profile.id }).then(existingUser => {
+        existingUser
+          ? done(null, existingUser) // tells passport to proceed with auth flow
+          : new User({ googleId: profile.id }) // creates a User Model Instance
+              .save() // saves to MOngoDB
+              .then(user => done(null, user));
+      });
     }
   )
 );
