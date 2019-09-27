@@ -12,7 +12,7 @@ passport.serializeUser((user, done) => {
 
 // Converts id back into an Instance //
 passport.deserializeUser((id, done) => {
-  User.findById(id).then(usesr => {
+  User.findById(id).then(user => {
     done(null, user);
   });
 });
