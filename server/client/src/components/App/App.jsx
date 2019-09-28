@@ -8,7 +8,7 @@ import SurveyNew from "../SurveyNew/SurveyNew";
 
 const App = () => {
   return (
-    <div>
+    <div className="container">
       <Router>
         <div>
           <Header />
