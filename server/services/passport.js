@@ -25,14 +25,17 @@ passport.use(
       callbackURL: "/auth/google/callback",
       proxy: true
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id }).then(existingUser => {
-        existingUser
-          ? done(null, existingUser) // tells passport to proceed with auth flow
-          : new User({ googleId: profile.id }) // creates a User Model Instance
-              .save() // saves to MOngoDB
-              .then(user => done(null, user));
-      });
+
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+      if (existingUser) {
+        done(null, existingUser);
+      }
+      const user = await new User({
+        googleId: profile.id,
+        displayName: profile.displayName
+      }).save();
+      done(null, user);
     }
   )
 );
