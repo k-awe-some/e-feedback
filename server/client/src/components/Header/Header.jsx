@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 const Header = ({ auth }) => {
@@ -7,12 +8,13 @@ const Header = ({ auth }) => {
   return (
     <nav>
       <div className="nav-wrapper">
-        <a className="left brand-logo">eFeedback</a>
+        <Link to={auth ? "/surveys" : "/"} className="left brand-logo">
+          eFeedback
+        </Link>
         <ul className="right">
           <li>
             {auth ? (
               <div>
-                {" "}
                 <span>Hello, {auth.displayName}</span>
                 <a className="waves-effect waves-light btn" href="/api/logout">
                   Log out
