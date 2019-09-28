@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import { connect } from "react-redux";
 
-const Header = () => {
-  const [auth, setAuth] = useState(null);
+const Header = ({ auth }) => {
+  console.log(auth);
 
   return (
     <nav>
@@ -9,7 +10,23 @@ const Header = () => {
         <a className="left brand-logo">eFeedback</a>
         <ul className="right">
           <li>
-            <a>Log in with Google</a>
+            {auth ? (
+              <div>
+                {" "}
+                <span>Hello, {auth.displayName}</span>
+                <a className="waves-effect waves-light btn" href="/api/logout">
+                  Log out
+                </a>
+              </div>
+            ) : (
+              <a
+                className="waves-effect waves-light btn"
+                href="/api/logout"
+                href="/auth/google"
+              >
+                Log in with Google
+              </a>
+            )}
           </li>
         </ul>
       </div>
@@ -17,4 +34,6 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = ({ auth }) => ({ auth });
+
+export default connect(mapStateToProps)(Header);
