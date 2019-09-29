@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
+import StripeButton from "../StripeButton/StripeButton";
+
 const Header = ({ auth }) => (
   <nav>
     <div className="nav-wrapper">
@@ -13,6 +15,7 @@ const Header = ({ auth }) => (
           {auth ? (
             <div>
               <span>Hello, {auth.displayName}</span>
+              <StripeButton />
               <a className="waves-effect waves-light btn" href="/api/logout">
                 Log out
               </a>
