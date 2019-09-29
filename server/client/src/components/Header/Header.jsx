@@ -14,7 +14,9 @@ const Header = ({ auth }) => (
         <li>
           {auth ? (
             <div>
-              <span>Hello, {auth.displayName}</span>
+              <span>
+                Hello, {auth.displayName}. You have {auth.credits} credits.
+              </span>
               <StripeButton />
               <a className="waves-effect waves-light btn" href="/api/logout">
                 Log out
