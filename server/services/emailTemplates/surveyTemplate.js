@@ -1,3 +1,5 @@
+const keys = require("../../config/keys");
+
 // exports a function that takes a survey
 // and returns a string that represents html
 module.exports = survey => {
@@ -9,10 +11,10 @@ module.exports = survey => {
         <p>Your answer to the following question would mean a lot to us:</p>
         <p>${survey.body}</p>
         <div>
-          <a href="http://localhost:3000">Yes</a>
+          <a href="${keys.redirectDomain}/api/surveys/thanks">Yes</a>
         </div>
         <div>
-          <a href="http://localhost:3000">No</a>
+          <a href="${keys.redirectDomain}/api/surveys/thanks">No</a>
         </div>
       </div>
     </body>
